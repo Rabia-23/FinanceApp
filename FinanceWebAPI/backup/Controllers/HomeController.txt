@@ -1,0 +1,87 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using FinanceWebAPI.Data;
+using FinanceWebAPI.DTOs;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace FinanceWebAPI.Controllers
+{
+    [Route("api/[controller]")] // /api/Home
+    [ApiController]
+    public class HomeController : ControllerBase
+    {
+        private readonly AppDbContext _context;
+
+        public HomeController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+         // /api/Home/{userId}
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetHomeData(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+                return NotFound("Kullanici bulunamadi.");
+
+            // --- Accounts ---
+            var accounts = await _context.Accounts
+            .Where(a => a.UserId == userId)
+            .Select(a => new AccountDto
+            {
+               AccountId = a.AccountId,
+               UserId = a.UserId,
+               AccountName = a.AccountName,
+               AccountBalance = a.AccountBalance,
+               Currency = a.Currency
+            })
+            .ToListAsync();
+
+
+            // Net Worth (AccountBalance alani kullaniliyor)
+            var netWorth = accounts.Sum(a => a.AccountBalance);
+
+            // --- Budgets ---
+            var budgets = await _context.Budgets
+                .Where(b => b.UserId == userId)
+                .OrderByDescending(b => b.StartDate)
+                .Take(5)
+                .ToListAsync();
+
+            // --- Transactions ---
+            var transactions = await _context.Transactions
+                .Where(t => t.UserId == userId)
+                .OrderByDescending(t => t.TransactionDate)
+                .Take(10)
+                .ToListAsync();
+
+            // --- Grafik icin gelir/gider toplami ---
+            var incomeSum = await _context.Transactions
+                .Where(t => t.UserId == userId && t.TransactionType == "Income")
+                .SumAsync(t => t.TransactionAmount);
+
+            var expenseSum = await _context.Transactions
+                .Where(t => t.UserId == userId && t.TransactionType == "Expense")
+                .SumAsync(t => t.TransactionAmount);
+
+            var data = new HomeDataDto
+            {
+               UserName = user.Username,
+               Accounts = accounts,
+               NetWorth = netWorth,
+               Budgets = budgets,
+               LastTransactions = transactions,
+               ChartData = new ChartData
+               {
+                  Income = incomeSum,
+                  Expense = expenseSum,
+                  Total = incomeSum - expenseSum
+               }
+            };
+
+            return Ok(data);
+        }
+    }
+}

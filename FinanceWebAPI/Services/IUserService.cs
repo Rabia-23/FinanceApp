@@ -1,0 +1,13 @@
+using FinanceWebAPI.Models;
+using System.Threading.Tasks;
+
+namespace FinanceWebAPI.Services
+{
+    public interface IUserService
+    {
+        Task<User> RegisterUserAsync(string username, string email, string password);
+        Task<User?> LoginUserAsync(string email, string password);
+        Task<bool> IsEmailTakenAsync(string email);
+        string GenerateJwtToken(User user);
+    }
+}

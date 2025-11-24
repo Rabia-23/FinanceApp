@@ -1,0 +1,153 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/AssetManifest.bin",
+      "PackagePath": "staticwebassets/assets/AssetManifest.bin"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/AssetManifest.bin.json",
+      "PackagePath": "staticwebassets/assets/AssetManifest.bin.json"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/AssetManifest.json",
+      "PackagePath": "staticwebassets/assets/AssetManifest.json"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/FontManifest.json",
+      "PackagePath": "staticwebassets/assets/FontManifest.json"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/NOTICES",
+      "PackagePath": "staticwebassets/assets"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/fonts/MaterialIcons-Regular.otf",
+      "PackagePath": "staticwebassets/assets/fonts/MaterialIcons-Regular.otf"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+      "PackagePath": "staticwebassets/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/packages/lucide_icons/assets/lucide.ttf",
+      "PackagePath": "staticwebassets/assets/packages/lucide_icons/assets/lucide.ttf"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/shaders/ink_sparkle.frag",
+      "PackagePath": "staticwebassets/assets/shaders/ink_sparkle.frag"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/canvaskit.js",
+      "PackagePath": "staticwebassets/canvaskit/canvaskit.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/canvaskit.js.symbols",
+      "PackagePath": "staticwebassets/canvaskit/canvaskit.js.symbols"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/canvaskit.wasm",
+      "PackagePath": "staticwebassets/canvaskit/canvaskit.wasm"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.js",
+      "PackagePath": "staticwebassets/canvaskit/chromium/canvaskit.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.js.symbols",
+      "PackagePath": "staticwebassets/canvaskit/chromium/canvaskit.js.symbols"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.wasm",
+      "PackagePath": "staticwebassets/canvaskit/chromium/canvaskit.wasm"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm.js",
+      "PackagePath": "staticwebassets/canvaskit/skwasm.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm.js.symbols",
+      "PackagePath": "staticwebassets/canvaskit/skwasm.js.symbols"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm.wasm",
+      "PackagePath": "staticwebassets/canvaskit/skwasm.wasm"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.js",
+      "PackagePath": "staticwebassets/canvaskit/skwasm_heavy.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.js.symbols",
+      "PackagePath": "staticwebassets/canvaskit/skwasm_heavy.js.symbols"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.wasm",
+      "PackagePath": "staticwebassets/canvaskit/skwasm_heavy.wasm"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/flutter.js",
+      "PackagePath": "staticwebassets/flutter.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/flutter_bootstrap.js",
+      "PackagePath": "staticwebassets/flutter_bootstrap.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/flutter_service_worker.js",
+      "PackagePath": "staticwebassets/flutter_service_worker.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-192.png",
+      "PackagePath": "staticwebassets/icons/Icon-192.png"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-512.png",
+      "PackagePath": "staticwebassets/icons/Icon-512.png"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-maskable-192.png",
+      "PackagePath": "staticwebassets/icons/Icon-maskable-192.png"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-maskable-512.png",
+      "PackagePath": "staticwebassets/icons/Icon-maskable-512.png"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/index.html",
+      "PackagePath": "staticwebassets/index.html"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/main.dart.js",
+      "PackagePath": "staticwebassets/main.dart.js"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/manifest.json",
+      "PackagePath": "staticwebassets/manifest.json"
+    },
+    {
+      "Id": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/version.json",
+      "PackagePath": "staticwebassets/version.json"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.FinanceWebAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.FinanceWebAPI.props",
+      "PackagePath": "build\\FinanceWebAPI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.FinanceWebAPI.props",
+      "PackagePath": "buildMultiTargeting\\FinanceWebAPI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.FinanceWebAPI.props",
+      "PackagePath": "buildTransitive\\FinanceWebAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
