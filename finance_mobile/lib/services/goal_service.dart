@@ -1,0 +1,104 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
+import '../models/goal_models.dart';
+import '../services/user_service.dart';
+
+class GoalService {
+  final ApiService _apiService = ApiService();
+
+  String get baseUrl {
+    if (kIsWeb) {
+      return "http://localhost:5182/api";
+    }
+    return "http://localhost:5182/api";
+  }
+
+  // ✅ Token'lı header oluştur
+  Future<Map<String, String>> _getAuthHeaders() async {
+    final token = await _apiService.getToken();
+    return {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+  }
+
+  // ---------------------------
+  // GET GOALS
+  // ---------------------------
+  Future<List<Goal>> getGoals(int userId) async {
+    final url = Uri.parse("$baseUrl/Goals/$userId");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonList = jsonDecode(response.body);
+      return jsonList.map((e) => Goal.fromJson(e)).toList();
+    } else if (response.statusCode == 401) {
+      throw Exception("Oturum süresi dolmuş. Lütfen tekrar giriş yapın.");
+    } else {
+      throw Exception("Hedefler alınamadı: ${response.statusCode}");
+    }
+  }
+
+  // ---------------------------
+  // ADD GOAL (POST)
+  // ---------------------------
+  Future<bool> addGoal(CreateGoalModel model) async {
+    final url = Uri.parse("$baseUrl/Goals");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(model.toJson()),
+    );
+
+    return response.statusCode == 200 || response.statusCode == 201;
+  }
+
+  // ---------------------------
+  // UPDATE GOAL (PUT)
+  // ---------------------------
+  Future<bool> updateGoal(int goalId, UpdateGoalModel model) async {
+    final url = Uri.parse("$baseUrl/Goals/$goalId");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: jsonEncode(model.toJson()),
+    );
+
+    return response.statusCode == 200;
+  }
+
+  // ---------------------------
+  // DELETE GOAL
+  // ---------------------------
+  Future<bool> deleteGoal(int goalId) async {
+    final url = Uri.parse("$baseUrl/Goals/$goalId");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.delete(url, headers: headers);
+
+    return response.statusCode == 200 || response.statusCode == 204;
+  }
+
+  // ---------------------------
+  // CONTRIBUTE TO GOAL
+  // ---------------------------
+  Future<bool> contributeToGoal(int goalId, ContributeToGoalModel model) async {
+    final url = Uri.parse("$baseUrl/Goals/$goalId/contribute");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(model.toJson()),
+    );
+
+    return response.statusCode == 200;
+  }
+}

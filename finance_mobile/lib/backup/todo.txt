@@ -1,0 +1,17 @@
+> Ana Sayfa:
+   - Hesap ekle pop-up'ini duzelt.
+   - Transaction ekle pop-up'ini duzelt.
+   - Budget alanina onclick yapildiginda cikan pop-up'i olustur.
+   - Gelir/gider grafigini duzelt.
+
+> Islemler Sayfasi:
+   - Tamamen duzelt. Hicbir sekilde istedigim gibi olmadi.
+
+> Abonelikler Sayfasi:
+   - Abonelik ekle pop-up'ini duzelt.
+
+> Hedefler Sayfasi:
+   - Navigation Bar falan ekle. Header kismini duzenle yani.
+
+> Doviz Sayfasi:
+   - Tamamen yenile. Ona dokunmadim henuz cunku.
