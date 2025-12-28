@@ -18,7 +18,7 @@
       * Yeni butce olusturma karti ile butcenin periyot tipi (haftalik, aylik, yillik), butcenin baslangic tarihi (bitis tarihi belirlenen periyot turune gore otomatik olusturulur) ve butce limiti bilgileri girilerek kolay bir sekilde yeni butce olusturulur.
       * Olusturulan butce kartinda butcenin limitiyle birlikte harcanan miktar, progress cubugu, butcenin yuzde kacinin harcandigi butce bitimine ne kadar kaldigi ve periyot tipi bulunur.
       * Butce kartina basildiginda butce gecmisleri gorunur.
-      * Butce kartina basili tutuldugunda butce guncelleme (?) ve silme secenekleri bulunur.
+      * Butce kartina basili tutuldugunda butce guncelleme ve silme secenekleri bulunur.
 # Transactions Page
    * Islemler aylara gore filtrelenebilir.
    * “CSV Indir” butonu ile filtrelenilen aya ait islemler csv dosyasi olarak indirilir.
@@ -36,11 +36,9 @@
 * USD, EUR, GBP, CHF, JPY, KRW ekranda -TRY bazli- gosterilir.
 
 
-# Eksikler
-   Butce guncellemesi
-   Goal ekleme
-   Transaction icin opsiyonel olan notlari transaction ustune tiklanildiginda veya hover yapildiginda gostermek istiyordum
-   Islemlerdeki kategorilere gore filtreleme yapma
-   Aylik kategorilere gore harcama grafigi (pasta grafigi olsa cok guzel olur. Mesela cizgi grafiginin ustune tiklanildiginda pasta grafigine gecse tekrar tiklanildiginda geri cizgi grafigine gecse. True, False state’i gibi)
-   Kategori secimini butun bilesenler icin ayni yap. (dropdown olacak -add_subscription’da oldugu gibi- ve hep ayni kategoriler olacak fix. Belki ileride kullanici kendi kategorisini olusturabilir)
-   Sadece Home Page’de giris suresi var. 1 saatten sonra tekrar giris istiyor ama diger sayfalar icin oyle degil.
+# Iyilestirme Onerileri
+   * Transaction icin opsiyonel olan notlari transaction ustune tiklanildiginda veya hover yapildiginda gostermek
+   * Islemlerdeki kategorilere gore filtreleme yapma
+   * Aylik kategorilere gore harcama grafigi (pasta grafigi)
+   * Mesela cizgi grafiginin ustune tiklanildiginda pasta grafigine gecse tekrar tiklanildiginda geri cizgi grafigine gecse. (True, False state’i gibi)
+   * Kategori secimini butun bilesenler icin ayni yap. (dropdown olacak -add_subscription’da oldugu gibi- ve hep ayni kategoriler olacak fix. Belki ileride kullanici kendi kategorisini olusturabilir)
