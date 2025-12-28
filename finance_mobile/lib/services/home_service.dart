@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart'; // ✅ kIsWeb için
+import 'package:flutter/foundation.dart'; // kIsWeb için
 import '../models/home_models.dart';
-import 'user_service.dart'; // ✅ Token almak için
+import 'user_service.dart'; // Token almak için
 
 class HomeService {
   final ApiService _apiService = ApiService();
 
-  // ✅ Platform'a göre base URL (Web desteği ile)
+  // Platform'a gore base URL (Web destegi ile)
   String get baseUrl {
     if (kIsWeb) {
       return "http://localhost:5182/api";
@@ -15,7 +15,7 @@ class HomeService {
     return "http://localhost:5182/api";
   }
 
-  // ✅ Token'lı header oluştur
+  // Token'li header olusturma
   Future<Map<String, String>> _getAuthHeaders() async {
     final token = await _apiService.getToken();
     return {
@@ -36,8 +36,8 @@ class HomeService {
     });
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonMap = jsonDecode(response.body);
-      return HomeData.fromJson(jsonMap);
+      final Map<String, dynamic> jsonMap = jsonDecode(response.body); // json'i dart map'e cevir
+      return HomeData.fromJson(jsonMap); // model o mapten HomeData objesi olusturur
     } else if (response.statusCode == 401) {
       throw Exception("Oturum süresi dolmuş. Lütfen tekrar giriş yapın.");
     } else {

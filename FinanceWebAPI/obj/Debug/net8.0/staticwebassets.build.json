@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "K+FkJW1RzIsWC63VIm2ylvSUkhILxjkEqlw8+cxtxwI=",
+  "Hash": "RIg2jeJ32V9WPWx9US210jahMZFCj0mYBr94qz290/Q=",
   "Source": "FinanceWebAPI",
   "BasePath": "_content/FinanceWebAPI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "FinanceWebAPI/wwwroot",
       "Source": "FinanceWebAPI",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/AssetManifest.bin",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/AssetManifest.bin",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/AssetManifest.bin",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot/assets/AssetManifest.bin"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/AssetManifest.bin.json",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/AssetManifest.bin.json",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/AssetManifest.bin.json",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot/assets/AssetManifest.bin.json"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/AssetManifest.json",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/AssetManifest.json",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/AssetManifest.json",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot/assets/AssetManifest.json"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/FontManifest.json",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/FontManifest.json",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/FontManifest.json",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot/assets/FontManifest.json"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/fonts/MaterialIcons-Regular.otf",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/fonts/MaterialIcons-Regular.otf",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/fonts/MaterialIcons-Regular.otf",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot/assets/fonts/MaterialIcons-Regular.otf"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/NOTICES",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/NOTICES",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/NOTICES",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot/assets/NOTICES"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/packages/lucide_icons/assets/lucide.ttf",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/packages/lucide_icons/assets/lucide.ttf",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/packages/lucide_icons/assets/lucide.ttf",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot/assets/packages/lucide_icons/assets/lucide.ttf"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/assets/shaders/ink_sparkle.frag",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/assets/shaders/ink_sparkle.frag",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "assets/shaders/ink_sparkle.frag",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot/assets/shaders/ink_sparkle.frag"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/canvaskit.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/canvaskit.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/canvaskit.js",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/canvaskit.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/canvaskit.js.symbols",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/canvaskit.js.symbols",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/canvaskit.js.symbols",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/canvaskit.js.symbols"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/canvaskit.wasm",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/canvaskit.wasm",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/canvaskit.wasm",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/canvaskit.wasm"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/chromium/canvaskit.js",
       "AssetKind": "All",
@@ -264,10 +264,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/chromium/canvaskit.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.js.symbols",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.js.symbols",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/chromium/canvaskit.js.symbols",
       "AssetKind": "All",
@@ -283,10 +283,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/chromium/canvaskit.js.symbols"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.wasm",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/chromium/canvaskit.wasm",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/chromium/canvaskit.wasm",
       "AssetKind": "All",
@@ -302,10 +302,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/chromium/canvaskit.wasm"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/skwasm_heavy.js",
       "AssetKind": "All",
@@ -321,10 +321,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/skwasm_heavy.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.js.symbols",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.js.symbols",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/skwasm_heavy.js.symbols",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/skwasm_heavy.js.symbols"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.wasm",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/skwasm_heavy.wasm",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/skwasm_heavy.wasm",
       "AssetKind": "All",
@@ -359,10 +359,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/skwasm_heavy.wasm"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/skwasm.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/skwasm.js",
       "AssetKind": "All",
@@ -378,10 +378,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/skwasm.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm.js.symbols",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/skwasm.js.symbols",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/skwasm.js.symbols",
       "AssetKind": "All",
@@ -397,10 +397,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/skwasm.js.symbols"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/canvaskit/skwasm.wasm",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/canvaskit/skwasm.wasm",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "canvaskit/skwasm.wasm",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot/canvaskit/skwasm.wasm"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/favicon.png",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/favicon.png",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -435,10 +435,10 @@
       "OriginalItemSpec": "wwwroot/favicon.png"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/flutter_bootstrap.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/flutter_bootstrap.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "flutter_bootstrap.js",
       "AssetKind": "All",
@@ -454,10 +454,10 @@
       "OriginalItemSpec": "wwwroot/flutter_bootstrap.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/flutter_service_worker.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/flutter_service_worker.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "flutter_service_worker.js",
       "AssetKind": "All",
@@ -473,10 +473,10 @@
       "OriginalItemSpec": "wwwroot/flutter_service_worker.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/flutter.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/flutter.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "flutter.js",
       "AssetKind": "All",
@@ -492,10 +492,10 @@
       "OriginalItemSpec": "wwwroot/flutter.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-192.png",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/icons/Icon-192.png",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "icons/Icon-192.png",
       "AssetKind": "All",
@@ -511,10 +511,10 @@
       "OriginalItemSpec": "wwwroot/icons/Icon-192.png"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-512.png",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/icons/Icon-512.png",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "icons/Icon-512.png",
       "AssetKind": "All",
@@ -530,10 +530,10 @@
       "OriginalItemSpec": "wwwroot/icons/Icon-512.png"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-maskable-192.png",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/icons/Icon-maskable-192.png",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "icons/Icon-maskable-192.png",
       "AssetKind": "All",
@@ -549,10 +549,10 @@
       "OriginalItemSpec": "wwwroot/icons/Icon-maskable-192.png"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/icons/Icon-maskable-512.png",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/icons/Icon-maskable-512.png",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "icons/Icon-maskable-512.png",
       "AssetKind": "All",
@@ -568,10 +568,10 @@
       "OriginalItemSpec": "wwwroot/icons/Icon-maskable-512.png"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/index.html",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/index.html",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -587,10 +587,10 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/main.dart.js",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/main.dart.js",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "main.dart.js",
       "AssetKind": "All",
@@ -606,10 +606,10 @@
       "OriginalItemSpec": "wwwroot/main.dart.js"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/manifest.json",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/manifest.json",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "manifest.json",
       "AssetKind": "All",
@@ -625,10 +625,10 @@
       "OriginalItemSpec": "wwwroot/manifest.json"
     },
     {
-      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/version.json",
+      "Identity": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/version.json",
       "SourceId": "FinanceWebAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/project from scratch/FinanceWebAPI/wwwroot/",
+      "ContentRoot": "/Users/rabiasevvalyasar/Desktop/study/web based technologies and applications/finance-app/FinanceWebAPI/wwwroot/",
       "BasePath": "_content/FinanceWebAPI",
       "RelativePath": "version.json",
       "AssetKind": "All",

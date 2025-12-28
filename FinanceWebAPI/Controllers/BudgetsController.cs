@@ -29,6 +29,12 @@ namespace FinanceWebAPI.Controllers
                .OrderByDescending(b => b.StartDate)
                .ToListAsync();
 
+         // ✅ Otomatik yenileme kontrolü
+         foreach (var budget in budgets)
+         {
+            await RenewBudgetIfExpired(budget);
+         }
+
          return Ok(budgets);
       }
 
@@ -39,15 +45,9 @@ namespace FinanceWebAPI.Controllers
          if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-         // ✅ DEBUG
-         Console.WriteLine($"[DEBUG] Received StartDate: {dto.StartDate}");
-         Console.WriteLine($"[DEBUG] Received EndDate: {dto.EndDate}");
-
-         // ✅ Tarihleri UTC olarak ayarla
          var startDate = DateTime.SpecifyKind(dto.StartDate, DateTimeKind.Utc);
          var endDate = DateTime.SpecifyKind(dto.EndDate, DateTimeKind.Utc);
 
-         // ✅ Kontrol: EndDate > StartDate olmalı
          if (endDate <= startDate)
          {
             return BadRequest("EndDate must be after StartDate");
@@ -66,9 +66,6 @@ namespace FinanceWebAPI.Controllers
          _context.Budgets.Add(budget);
          await _context.SaveChangesAsync();
 
-         // ✅ DEBUG
-         Console.WriteLine($"[DEBUG] Created budget: Start={budget.StartDate}, End={budget.EndDate}");
-
          return Ok(budget);
       }
 
@@ -80,9 +77,18 @@ namespace FinanceWebAPI.Controllers
          if (budget == null)
                return NotFound();
 
+         // ✅ UTC olarak belirt (PostgreSQL hatası çözümü)
+         var startDate = DateTime.SpecifyKind(dto.StartDate, DateTimeKind.Utc);
+         var endDate = DateTime.SpecifyKind(dto.EndDate, DateTimeKind.Utc);
+
+         if (endDate <= startDate)
+         {
+            return BadRequest("EndDate must be after StartDate");
+         }
+
          budget.PeriodType = dto.PeriodType;
-         budget.StartDate = dto.StartDate;
-         budget.EndDate = dto.EndDate;
+         budget.StartDate = startDate;
+         budget.EndDate = endDate;
          budget.AmountLimit = dto.AmountLimit;
          budget.SpentAmount = dto.SpentAmount;
 
@@ -102,6 +108,53 @@ namespace FinanceWebAPI.Controllers
          await _context.SaveChangesAsync();
 
          return NoContent();
+      }
+
+      // ✅ YENİ: Otomatik Yenileme Fonksiyonu
+      private async Task RenewBudgetIfExpired(Budget budget)
+      {
+         var now = DateTime.UtcNow;
+
+         // Eğer bitiş tarihi geçmişse, yenile
+         if (budget.EndDate < now)
+         {
+            var oldStart = budget.StartDate;
+            var oldEnd = budget.EndDate;
+
+            // Yeni dönem hesapla
+            switch (budget.PeriodType)
+            {
+               case "Weekly":
+                  budget.StartDate = oldEnd;
+                  budget.EndDate = oldEnd.AddDays(7);
+                  break;
+
+               case "Monthly":
+                  budget.StartDate = oldEnd;
+                  budget.EndDate = new DateTime(
+                     oldEnd.Year, 
+                     oldEnd.Month, 
+                     oldEnd.Day,
+                     0, 0, 0,
+                     DateTimeKind.Utc
+                  ).AddMonths(1);
+                  break;
+
+               case "Yearly":
+                  budget.StartDate = oldEnd;
+                  budget.EndDate = oldEnd.AddYears(1);
+                  break;
+            }
+
+            // Harcamayı sıfırla
+            budget.SpentAmount = 0;
+
+            // Veritabanına kaydet
+            _context.Budgets.Update(budget);
+            await _context.SaveChangesAsync();
+
+            Console.WriteLine($"[AUTO-RENEW] Budget {budget.BudgetId} renewed: {oldStart} -> {budget.StartDate}");
+         }
       }
    }
 }

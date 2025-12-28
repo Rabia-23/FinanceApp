@@ -10,7 +10,7 @@ using FinanceWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// PostgreSQL bağlantısı
+// Database baglantisi
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!))
     };
 
-    // Geliştirilmiş debug
+    // debug
     options.Events = new JwtBearerEvents
    {
       OnMessageReceived = context =>
@@ -47,7 +47,7 @@ builder.Services.AddAuthentication(options =>
          var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
          Console.WriteLine($"OnMessageReceived - Token: {token}");
          
-         // ÖNEMLİ: Token'ı context'e set et
+         // Token'i context'e set et
          if (!string.IsNullOrEmpty(token))
          {
                context.Token = token;
@@ -70,7 +70,7 @@ builder.Services.AddAuthentication(options =>
       {
          Console.WriteLine("Token VALIDATED successfully!");
          
-         // Tüm claim'leri yazdır
+         // Tum claim'leri yazdir
          if (context.Principal != null)
          {
             Console.WriteLine("All Claims:");
@@ -82,7 +82,7 @@ builder.Services.AddAuthentication(options =>
             var userId = context.Principal.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             Console.WriteLine($"User ID from token (Sub): {userId}");
             
-            // Alternatif claim type'ları da dene
+            // Alternatif claim type'lari da dene
             var userIdAlt = context.Principal.FindFirst("sub")?.Value;
             Console.WriteLine($"User ID from token (sub lowercase): {userIdAlt}");
          }
@@ -136,7 +136,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// 1️⃣ CORS servisini ekle
+// CORS servisi
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -149,7 +149,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Swagger (isteğe bağlı)
+// Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -163,7 +163,7 @@ app.UseStaticFiles();
 
 
 app.UseRouting(); // HTTP isteklerini Controller'a yonlendirir
-// 2️⃣ CORS middleware’ini ekle
+// CORS middleware’i
 app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization(); // yetkilendirme kontrolu (su an auth yok)

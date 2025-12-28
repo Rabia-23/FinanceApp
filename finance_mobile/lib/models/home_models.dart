@@ -47,9 +47,9 @@ class Budget {
   double get spent => spentAmount;
 
   String get month {
-    // startDate'den ay adını almak için
+    // startDate'den ay adini almak icin
     final date = DateTime.parse(startDate);
-    return "${date.month}/${date.year}"; // örn. "11/2025"
+    return "${date.month}/${date.year}"; // orn. "11/2025"
   }
 
   factory Budget.fromJson(Map<String, dynamic> json) {
