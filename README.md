@@ -6,7 +6,7 @@
 ## Home Page
    - Accounts
       * Bakiye ve Hesap Adi bilgileri girilerek yeni hesap eklenebilir.
-      * Ana sayfada Hesap kartlari halinde Hesba adi ve o hesaba ait bakiye gosterilir.
+      * Ana sayfada Hesap kartlari halinde Hesap adi ve o hesaba ait bakiye gosterilir.
    - Net Worth + Graph
       * Kullanicinin toplam bakiyesi gosterilir.
       * Gelir ve giderleri tek cizgi grafik ile gosterilir.
@@ -42,3 +42,5 @@
    * Aylik kategorilere gore harcama grafigi (pasta grafigi)
    * Mesela cizgi grafiginin ustune tiklanildiginda pasta grafigine gecse tekrar tiklanildiginda geri cizgi grafigine gecse. (True, False state’i gibi)
    * Kategori secimini butun bilesenler icin ayni yap. (dropdown olacak -add_subscription’da oldugu gibi- ve hep ayni kategoriler olacak fix. Belki ileride kullanici kendi kategorisini olusturabilir)
+   * Hesap silme
+   * Sifre degistirme
