@@ -38,9 +38,10 @@
 
 # Iyilestirme Onerileri
    * Transaction icin opsiyonel olan notlari transaction ustune tiklanildiginda veya hover yapildiginda gostermek
-   * Islemlerdeki kategorilere gore filtreleme yapma
-   * Aylik kategorilere gore harcama grafigi (pasta grafigi)
-   * Mesela cizgi grafiginin ustune tiklanildiginda pasta grafigine gecse tekrar tiklanildiginda geri cizgi grafigine gecse. (True, False state’i gibi)
+   * Transaction sayfasinda transaction'lari guncelleme ve silme secenekleri
+   * Transaction sayfasinda bulundugun ay icin toplam harcama yukarida yazacak
+   * Islemlerde (transactions) kategorilere ve turune (expense mi income mi one gore) gore filtreleme yapma. (su an sadece dropdown ile tarihe gore -aylara gore- filtreliyor)
+   * Aylik kategorilere gore harcama grafigi (pasta grafigi). Mesela cizgi grafiginin ustune tiklanildiginda pasta grafigine gecse tekrar tiklanildiginda geri cizgi grafigine gecse. (True, False state’i gibi)
    * Kategori secimini butun bilesenler icin ayni yap. (dropdown olacak -add_subscription’da oldugu gibi- ve hep ayni kategoriler olacak fix. Belki ileride kullanici kendi kategorisini olusturabilir)
    * Hesap silme
-   * Sifre degistirme
+   * Kullanici istege bagli sifresini degistirebilecek
