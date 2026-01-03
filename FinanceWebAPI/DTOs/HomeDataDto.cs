@@ -7,7 +7,7 @@ namespace FinanceWebAPI.DTOs
     {
         public string UserName { get; set; } = string.Empty;
         public int UserId { get; set; }
-        public List<AccountDto> Accounts { get; set; } = new(); // Burayı AccountDto yaptık
+        public List<AccountDto> Accounts { get; set; } = new();
         public decimal NetWorth { get; set; }
         public List<Budget> Budgets { get; set; } = new();
         public List<Transaction> LastTransactions { get; set; } = new();

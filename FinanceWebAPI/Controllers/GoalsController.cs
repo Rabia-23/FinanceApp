@@ -89,17 +89,17 @@ namespace FinanceWebAPI.Controllers
                if (account == null)
                      return NotFound("Hesap bulunamadı.");
 
-               // ✅ Yeterli bakiye kontrolü
+               // Yeterli bakiye kontrolü
                if (account.AccountBalance < dto.Amount)
                      return BadRequest("Yetersiz bakiye.");
 
-               // ✅ Account'tan para düş
+               // Account'tan para düş
                account.AccountBalance -= dto.Amount;
 
-               // ✅ Goal'a para ekle
+               // Goal'a para ekle
                goal.CurrentAmount += dto.Amount;
 
-               // ✅ Transaction oluştur
+               // Transaction oluştur
                var transaction = new Transaction
                {
                      UserId = goal.UserId,

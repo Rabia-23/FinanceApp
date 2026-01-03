@@ -124,7 +124,7 @@ class _GoalsPageState extends State<GoalsPage> {
     );
   }
 
-  // 🌐 WEB CONTENT (Sidebar yok, sadece içerik)
+  // WEB CONTENT (Sidebar yok, sadece içerik)
   Widget _buildWebContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,7 +217,7 @@ class _GoalsPageState extends State<GoalsPage> {
     );
   }
 
-  // 📱 MOBILE LAYOUT
+  // MOBILE LAYOUT
   Widget _buildMobileLayout() {
     return _isLoading
         ? const Center(child: CircularProgressIndicator())

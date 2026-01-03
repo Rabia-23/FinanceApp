@@ -98,7 +98,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
     );
   }
 
-  // 🌐 WEB FORM
+  // WEB FORM
   Widget _buildWebForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +176,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
     );
   }
 
-  // 📱 MOBILE FORM
+  // MOBILE FORM
   Widget _buildMobileForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

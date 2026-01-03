@@ -73,7 +73,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     );
   }
 
-  // 🌐 WEB CONTENT (Sidebar yok, sadece içerik)
+  // WEB CONTENT (Sidebar yok, sadece içerik)
   Widget _buildWebContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,7 +245,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     );
   }
 
-  // 📱 MOBILE LAYOUT
+  // MOBILE LAYOUT
   Widget _buildMobileLayout() {
     return SafeArea(
       child: _isLoading

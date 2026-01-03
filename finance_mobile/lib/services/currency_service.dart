@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class CurrencyService {
-  // ✅ Ücretsiz API (günde 1500 istek)
+  // Ücretsiz API (günde 1500 istek)
   static const String apiUrl = "https://api.exchangerate-api.com/v4/latest/TRY";
 
   Future<Map<String, dynamic>> getCurrencies() async {
@@ -41,7 +41,7 @@ class CurrencyService {
     }
   }
 
-  // ✅ Dönüştürme fonksiyonu (opsiyonel)
+  // Dönüştürme fonksiyonu (opsiyonel)
   Future<double> convertCurrency({
     required String from,
     required String to,

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
-using FinanceWebAPI.Models; // ✅ Budget için eklendi
+using FinanceWebAPI.Models; // Budget için
 
 namespace FinanceWebAPI.Controllers
 {
@@ -50,14 +50,14 @@ namespace FinanceWebAPI.Controllers
 
             var netWorth = accounts.Sum(a => a.AccountBalance);
 
-            // ✅ Budget'leri getirirken otomatik yenileme kontrolü yap
+            // Budget'leri getirirken otomatik yenileme kontrolü yap
             var budgets = await _context.Budgets
                .Where(b => b.UserId == userId)
                .OrderByDescending(b => b.StartDate)
                .Take(5)
                .ToListAsync();
 
-            // ✅ Her budget için yenileme kontrolü
+            // Her budget için yenileme kontrolü
             foreach (var budget in budgets)
             {
                 await RenewBudgetIfExpired(budget);
@@ -96,7 +96,7 @@ namespace FinanceWebAPI.Controllers
             return Ok(data);
         }
 
-        // ✅ YENİ: Otomatik Yenileme Fonksiyonu (HomeController'da da kullanıyoruz)
+        // Otomatik Yenileme Fonksiyonu
         private async Task RenewBudgetIfExpired(Budget budget)
         {
             var now = DateTime.UtcNow;

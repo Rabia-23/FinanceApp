@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter/foundation.dart'; // ✅ kIsWeb için
+import 'package:flutter/foundation.dart'; // kIsWeb için
 
 class ApiService {
   final _storage = const FlutterSecureStorage();
 
-  // ✅ Platform'a göre base URL (Web desteği ile)
+  // Platform'a göre base URL (Web desteği ile)
   String get baseUrl {
     // Web için
     if (kIsWeb) {

@@ -1,0 +1,183 @@
+// Transaction item widgets ve yardımcı fonksiyonlar
+
+  Widget _buildWebTransactionItem(Transaction tx) {
+    final isIncome = tx.transactionType == "Income";
+    final amount = tx.transactionAmount;
+    final color = isIncome ? Colors.green : Colors.red;
+    final timeFormatted = _formatTime(tx.transactionTime);
+    final hasNote = tx.transactionNote != null && tx.transactionNote!.isNotEmpty;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => _showTransactionDetails(tx),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.grey[50],
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey[200]!),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(isIncome ? LucideIcons.trendingUp : LucideIcons.trendingDown, size: 20, color: color),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(tx.transactionTitle, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15), overflow: TextOverflow.ellipsis),
+                        ),
+                        if (hasNote) ...[
+                          const SizedBox(width: 8),
+                          Tooltip(
+                            message: tx.transactionNote!,
+                            child: Icon(Icons.note, size: 16, color: Colors.grey[600]),
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(4)),
+                          child: Text(tx.transactionCategory, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(timeFormatted, style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                "${isIncome ? '+' : '-'}₺${amount.abs().toStringAsFixed(0)}",
+                style: TextStyle(fontWeight: FontWeight.bold, color: color, fontSize: 17),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTransactionItem(Transaction tx) {
+    final isIncome = tx.transactionType == "Income";
+    final amount = tx.transactionAmount;
+    final color = isIncome ? Colors.green : Colors.red;
+    final timeFormatted = _formatTime(tx.transactionTime);
+    final hasNote = tx.transactionNote != null && tx.transactionNote!.isNotEmpty;
+
+    return GestureDetector(
+      onTap: () => _showTransactionDetails(tx),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Row(
+          children: [
+            Icon(isIncome ? LucideIcons.trendingUp : LucideIcons.trendingDown, size: 18, color: color),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(tx.transactionTitle, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15), overflow: TextOverflow.ellipsis),
+                      ),
+                      if (hasNote) Icon(Icons.note, size: 14, color: Colors.grey[600]),
+                    ],
+                  ),
+                  Text("${tx.transactionCategory} • $timeFormatted", style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+                ],
+              ),
+            ),
+            Text("${isIncome ? '+' : '-'}₺${amount.abs().toStringAsFixed(0)}", style: TextStyle(fontWeight: FontWeight.w600, color: color)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  DateTime _parseDateTime(String dateStr, String timeStr) {
+    try {
+      final date = DateTime.parse(dateStr);
+      final timeParts = timeStr.split(':');
+      if (timeParts.length >= 2) {
+        return DateTime(date.year, date.month, date.day, int.tryParse(timeParts[0]) ?? 0, int.tryParse(timeParts[1]) ?? 0);
+      }
+      return date;
+    } catch (e) {
+      return DateTime.now();
+    }
+  }
+
+  String _formatDateKey(String dateStr) {
+    try {
+      final date = DateTime.parse(dateStr);
+      final months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+      return "${date.day} ${months[date.month - 1]}";
+    } catch (e) {
+      return dateStr;
+    }
+  }
+
+  String _formatDateForCSV(String dateStr) {
+    try {
+      final date = DateTime.parse(dateStr);
+      return "${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}";
+    } catch (e) {
+      return dateStr;
+    }
+  }
+
+  String _formatTime(String timeStr) {
+    try {
+      final parts = timeStr.split(':');
+      if (parts.length >= 2) {
+        return "${parts[0].padLeft(2, '0')}:${parts[1].padLeft(2, '0')}";
+      }
+      return timeStr;
+    } catch (e) {
+      return timeStr;
+    }
+  }
+
+  String _formatMonthYear(DateTime date) {
+    final months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+    return "${months[date.month - 1]} ${date.year}";
+  }
+
+  Widget _navButton(BuildContext context, {required IconData icon, required String label, bool isActive = false, required VoidCallback onTap}) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(color: isActive ? Colors.black : Colors.transparent, borderRadius: BorderRadius.circular(10)),
+          child: Row(
+            children: [
+              Icon(icon, size: 18, color: isActive ? Colors.white : Colors.black87),
+              const SizedBox(width: 6),
+              Text(label, style: TextStyle(color: isActive ? Colors.white : Colors.black87, fontWeight: FontWeight.w500)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

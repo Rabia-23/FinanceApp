@@ -14,7 +14,7 @@ class SubscriptionService {
     return "http://localhost:5182/api";
   }
 
-  // ✅ Token'lı header oluştur
+  // Token'lı header oluştur
   Future<Map<String, String>> _getAuthHeaders() async {
     final token = await _apiService.getToken();
     return {

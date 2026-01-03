@@ -204,6 +204,40 @@ class CreateTransactionModel {
   }
 }
 
+class UpdateTransactionModel {
+  final int transactionId;
+  final String transactionType;
+  final String transactionTitle;
+  final String transactionCategory;
+  final double transactionAmount;
+  final String? transactionNote;
+  final String transactionDate;
+  final String transactionTime;
+
+  UpdateTransactionModel({
+    required this.transactionId,
+    required this.transactionType,
+    required this.transactionTitle,
+    required this.transactionCategory,
+    required this.transactionAmount,
+    this.transactionNote,
+    required this.transactionDate,
+    required this.transactionTime,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "transactionType": transactionType,
+      "transactionTitle": transactionTitle,
+      "transactionCategory": transactionCategory,
+      "transactionAmount": transactionAmount,
+      "transactionNote": transactionNote,
+      "transactionDate": transactionDate,
+      "transactionTime": transactionTime,
+    };
+  }
+}
+
 class CreateAccountModel {
   final int userId;
   final String accountName;

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import '../services/home_service.dart';
 import '../models/home_models.dart';
+import '../constants/categories.dart';
 
 class AddTransactionPopup extends StatefulWidget {
   final String userId;
   final VoidCallback? onTransactionAdded;
+  final Transaction? transaction; // Düzenleme için
 
   const AddTransactionPopup({
     super.key,
     required this.userId,
     this.onTransactionAdded,
+    this.transaction,
   });
 
   @override
@@ -21,21 +24,49 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
   Account? selectedAccount;
+  String? selectedCategory;
 
   final TextEditingController amountController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
-  final TextEditingController categoryController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
   final HomeService _homeService = HomeService();
 
   List<Account> _accounts = [];
   bool _isLoadingAccounts = true;
+  bool get isEditing => widget.transaction != null;
 
   @override
   void initState() {
     super.initState();
     _loadAccounts();
+    
+    // Düzenleme modundaysa mevcut değerleri yükle
+    if (isEditing) {
+      _loadTransactionData();
+    }
+  }
+
+  void _loadTransactionData() {
+    final tx = widget.transaction!;
+    selectedType = tx.transactionType == "Income" ? "Gelir" : "Gider";
+    titleController.text = tx.transactionTitle;
+    selectedCategory = tx.transactionCategory;
+    amountController.text = tx.transactionAmount.toString();
+    noteController.text = tx.transactionNote ?? '';
+    
+    try {
+      selectedDate = DateTime.parse(tx.transactionDate);
+      final timeParts = tx.transactionTime.split(':');
+      if (timeParts.length >= 2) {
+        selectedTime = TimeOfDay(
+          hour: int.parse(timeParts[0]),
+          minute: int.parse(timeParts[1]),
+        );
+      }
+    } catch (e) {
+      // Hata durumunda varsayılan değerler kullanılır
+    }
   }
 
   Future<void> _loadAccounts() async {
@@ -46,6 +77,14 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
         setState(() {
           _accounts = accounts;
           _isLoadingAccounts = false;
+          
+          // Düzenleme modundaysa hesabı bul
+          if (isEditing && widget.transaction != null) {
+            selectedAccount = accounts.firstWhere(
+              (acc) => acc.accountId == widget.transaction!.accountId,
+              orElse: () => accounts.first,
+            );
+          }
         });
       }
     } catch (e) {
@@ -107,12 +146,16 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
                       color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Icon(Icons.add, color: Colors.white, size: 20),
+                    child: Icon(
+                      isEditing ? Icons.edit : Icons.add,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ),
                   const SizedBox(width: 12),
-                  const Text(
-                    "Yeni İşlem Ekle",
-                    style: TextStyle(
+                  Text(
+                    isEditing ? "İşlemi Düzenle" : "Yeni İşlem Ekle",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -140,7 +183,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
     );
   }
 
-  // 🌐 WEB FORM (İki Kolonlu)
+  // WEB FORM (İki Kolonlu)
   Widget _buildWebForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,11 +256,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
             Expanded(
               child: _buildField(
                 label: "Kategori",
-                child: _buildTextField(
-                  controller: categoryController,
-                  hint: "örn: Alışveriş",
-                  prefixIcon: Icons.category,
-                ),
+                child: _buildCategoryDropdown(),
               ),
             ),
           ],
@@ -247,9 +286,9 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               elevation: 0,
             ),
-            child: const Text(
-              "İşlem Ekle",
-              style: TextStyle(
+            child: Text(
+              isEditing ? "Güncelle" : "İşlem Ekle",
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
                 fontSize: 16,
@@ -257,11 +296,36 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
             ),
           ),
         ),
+        
+        // Silme butonu (sadece düzenleme modunda)
+        if (isEditing) ...[
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            height: 52,
+            child: OutlinedButton.icon(
+              onPressed: _deleteTransaction,
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.red),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              icon: const Icon(Icons.delete, color: Colors.red),
+              label: const Text(
+                "Sil",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
 
-  // 📱 MOBILE FORM (Tek Kolon)
+  // MOBILE FORM (Tek Kolon)
   Widget _buildMobileForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,11 +368,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
 
         _buildField(
           label: "Kategori",
-          child: _buildTextField(
-            controller: categoryController,
-            hint: "örn: Alışveriş",
-            prefixIcon: Icons.category,
-          ),
+          child: _buildCategoryDropdown(),
         ),
         const SizedBox(height: 16),
 
@@ -332,12 +392,33 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
               backgroundColor: Colors.deepPurple,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             ),
-            child: const Text(
-              "İşlem Ekle",
-              style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+            child: Text(
+              isEditing ? "Güncelle" : "İşlem Ekle",
+              style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
             ),
           ),
         ),
+        
+        // Silme butonu (sadece düzenleme modunda)
+        if (isEditing) ...[
+          const SizedBox(height: 12),
+          SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: OutlinedButton.icon(
+              onPressed: _deleteTransaction,
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.red),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              ),
+              icon: const Icon(Icons.delete, color: Colors.red),
+              label: const Text(
+                "Sil",
+                style: TextStyle(fontWeight: FontWeight.w600, color: Colors.red),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -400,7 +481,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
 
   Widget _buildTypeDropdown() {
     return DropdownButtonFormField<String>(
-      initialValue: selectedType,
+      value: selectedType,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.grey[50],
@@ -423,7 +504,54 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
         DropdownMenuItem(value: "Gelir", child: Text("Gelir")),
         DropdownMenuItem(value: "Gider", child: Text("Gider")),
       ],
-      onChanged: (v) => setState(() => selectedType = v!),
+      onChanged: (v) {
+        setState(() {
+          selectedType = v!;
+          // Tür değiştiğinde kategoriyi sıfırla
+          selectedCategory = null;
+        });
+      },
+    );
+  }
+
+  Widget _buildCategoryDropdown() {
+    final categories = Categories.getCategoriesByType(selectedType);
+    
+    return DropdownButtonFormField<String>(
+      value: selectedCategory,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.grey[50],
+        prefixIcon: Icon(Icons.category, size: 20, color: Colors.grey[600]),
+        hintText: "Kategori seçin",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey[300]!),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey[300]!),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+      ),
+      items: categories.map((category) {
+        final icon = Categories.getCategoryIcon(category);
+        return DropdownMenuItem<String>(
+          value: category,
+          child: Row(
+            children: [
+              Text(icon, style: const TextStyle(fontSize: 20)),
+              const SizedBox(width: 8),
+              Text(category),
+            ],
+          ),
+        );
+      }).toList(),
+      onChanged: (v) => setState(() => selectedCategory = v),
     );
   }
 
@@ -534,7 +662,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
     }
 
     return DropdownButtonFormField<Account>(
-      initialValue: selectedAccount,
+      value: selectedAccount,
       isExpanded: true,
       decoration: InputDecoration(
         filled: true,
@@ -572,7 +700,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
   Future<void> _submitTransaction() async {
     if (amountController.text.isEmpty ||
         titleController.text.isEmpty ||
-        categoryController.text.isEmpty ||
+        selectedCategory == null ||
         selectedAccount == null) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -590,32 +718,98 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
     final formattedTime = "${selectedTime.hour.toString().padLeft(2, '0')}:"
         "${selectedTime.minute.toString().padLeft(2, '0')}:00";
 
-    final model = CreateTransactionModel(
-      userId: int.parse(widget.userId),
-      accountId: selectedAccount!.accountId,
-      transactionType: backendType,
-      transactionTitle: titleController.text,
-      transactionCategory: categoryController.text,
-      transactionAmount: double.parse(amountController.text),
-      transactionNote: noteController.text.isEmpty ? null : noteController.text,
-      transactionDate: formattedDate,
-      transactionTime: formattedTime,
-    );
-
     try {
-      final result = await _homeService.addTransaction(model);
+      bool result;
+      
+      if (isEditing) {
+        // Güncelleme işlemi
+        final updateModel = UpdateTransactionModel(
+          transactionId: widget.transaction!.transactionId,
+          transactionType: backendType,
+          transactionTitle: titleController.text,
+          transactionCategory: selectedCategory!,
+          transactionAmount: double.parse(amountController.text),
+          transactionNote: noteController.text.isEmpty ? null : noteController.text,
+          transactionDate: formattedDate,
+          transactionTime: formattedTime,
+        );
+        result = await _homeService.updateTransaction(updateModel);
+      } else {
+        // Yeni ekleme işlemi
+        final model = CreateTransactionModel(
+          userId: int.parse(widget.userId),
+          accountId: selectedAccount!.accountId,
+          transactionType: backendType,
+          transactionTitle: titleController.text,
+          transactionCategory: selectedCategory!,
+          transactionAmount: double.parse(amountController.text),
+          transactionNote: noteController.text.isEmpty ? null : noteController.text,
+          transactionDate: formattedDate,
+          transactionTime: formattedTime,
+        );
+        result = await _homeService.addTransaction(model);
+      }
 
       if (!mounted) return;
 
       if (result) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("İşlem başarıyla eklendi.")),
+          SnackBar(content: Text(isEditing ? "İşlem güncellendi." : "İşlem eklendi.")),
         );
         widget.onTransactionAdded?.call();
         Navigator.pop(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Bir hata oluştu, tekrar deneyin.")),
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Hata: $e")),
+      );
+    }
+  }
+
+  Future<void> _deleteTransaction() async {
+    if (!isEditing) return;
+
+    // Onay diyalogu göster
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("İşlemi Sil"),
+        content: const Text("Bu işlemi silmek istediğinizden emin misiniz?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text("İptal"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text("Sil"),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || !mounted) return;
+
+    try {
+      final result = await _homeService.deleteTransaction(widget.transaction!.transactionId);
+
+      if (!mounted) return;
+
+      if (result) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("İşlem silindi.")),
+        );
+        widget.onTransactionAdded?.call();
+        Navigator.pop(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Silme işlemi başarısız oldu.")),
         );
       }
     } catch (e) {

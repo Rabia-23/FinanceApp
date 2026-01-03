@@ -6,6 +6,8 @@ import '../services/home_service.dart';
 import '../services/user_service.dart';
 import '../models/home_models.dart';
 import '../csv/csv_helper.dart';
+import '../constants/categories.dart';
+import '../popups/edit_transaction.dart';
 
 class TransactionsPage extends StatefulWidget {
   const TransactionsPage({super.key});
@@ -22,6 +24,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
   List<Transaction> _filteredTransactions = [];
   bool _isLoading = true;
   String? _userId;
+
+  String? _selectedCategory;
+  String? _selectedType; // "Income", "Expense", veya null (ikisi de)
 
   late List<DateTime> _availableMonths;
   late DateTime _selectedMonth;
@@ -53,7 +58,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
       if (mounted) {
         setState(() {
           _allTransactions = transactions;
-          _filterByMonth();
+          _applyFilters();
           _isLoading = false;
         });
       }
@@ -65,11 +70,17 @@ class _TransactionsPageState extends State<TransactionsPage> {
     }
   }
 
-  void _filterByMonth() {
+  void _applyFilters() {
     _filteredTransactions = _allTransactions.where((tx) {
       try {
         final txDate = DateTime.parse(tx.transactionDate);
-        return txDate.year == _selectedMonth.year && txDate.month == _selectedMonth.month;
+        final isInSelectedMonth = txDate.year == _selectedMonth.year && txDate.month == _selectedMonth.month;
+        
+        if (!isInSelectedMonth) return false;
+        if (_selectedCategory != null && tx.transactionCategory != _selectedCategory) return false;
+        if (_selectedType != null && tx.transactionType != _selectedType) return false;
+        
+        return true;
       } catch (e) {
         return false;
       }
@@ -80,6 +91,66 @@ class _TransactionsPageState extends State<TransactionsPage> {
       final dateB = _parseDateTime(b.transactionDate, b.transactionTime);
       return dateB.compareTo(dateA);
     });
+  }
+
+  // Filtreleri temizle
+  void _clearFilters() {
+    setState(() {
+      _selectedCategory = null;
+      _selectedType = null;
+      _applyFilters();
+    });
+  }
+
+  // Transaction silme
+  Future<void> _deleteTransaction(Transaction tx) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("İşlemi Sil"),
+        content: Text("'${tx.transactionTitle}' işlemini silmek istediğinize emin misiniz?"),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text("İptal"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text("Sil"),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      try {
+        await _homeService.deleteTransaction(tx.transactionId);
+        await _loadTransactions();
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("İşlem silindi")),
+          );
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Hata: $e")),
+          );
+        }
+      }
+    }
+  }
+
+  // Transaction güncelleme popup'ı aç
+  void _editTransaction(Transaction tx) {
+    showDialog(
+      context: context,
+      builder: (context) => EditTransactionPopup(
+        transaction: tx,
+        onTransactionUpdated: _loadTransactions,
+      ),
+    );
   }
 
   Future<void> _downloadCSV() async {
@@ -137,7 +208,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     );
   }
 
-  // 🌐 WEB CONTENT (Sidebar yok, sadece içerik)
+  // WEB CONTENT
   Widget _buildWebContent() {
     final Map<String, List<Transaction>> grouped = {};
     for (final tx in _filteredTransactions) {
@@ -191,8 +262,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 ),
                 icon: const Icon(Icons.add, size: 20, color: Colors.white),
-                label: const Text("Yeni İşlem",
-                    style: TextStyle(color: Colors.white),),
+                label: const Text("Yeni İşlem", style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -222,52 +292,200 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     decoration: BoxDecoration(
                       border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
                     ),
-                    child: Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.filter_list, size: 20),
-                        const SizedBox(width: 8),
-                        const Text(
-                          "Filtrele",
-                          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                        ),
-                        const Spacer(),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[50],
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey[300]!),
-                          ),
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<DateTime>(
-                              value: _selectedMonth,
-                              icon: const Icon(Icons.arrow_drop_down, size: 20),
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black87,
-                                fontSize: 14,
-                              ),
-                              onChanged: (DateTime? newValue) {
-                                if (newValue != null) {
-                                  setState(() {
-                                    _selectedMonth = newValue;
-                                    _filterByMonth();
-                                  });
-                                }
-                              },
-                              items: _availableMonths.map<DropdownMenuItem<DateTime>>((DateTime month) {
-                                return DropdownMenuItem<DateTime>(
-                                  value: month,
-                                  child: Text(_formatMonthYear(month)),
-                                );
-                              }).toList(),
+                        Row(
+                          children: [
+                            const Icon(Icons.filter_list, size: 20),
+                            const SizedBox(width: 8),
+                            const Text(
+                              "Filtrele",
+                              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                             ),
-                          ),
+                            const Spacer(),
+                            Text(
+                              "${_filteredTransactions.length} işlem",
+                              style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 16),
-                        Text(
-                          "${_filteredTransactions.length} işlem",
-                          style: TextStyle(color: Colors.grey[600], fontSize: 14),
+                        const SizedBox(height: 16),
+                        // Filtreleme seçenekleri
+                        Row(
+                          children: [
+                            // Ay seçimi
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Ay",
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[50],
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.grey[300]!),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<DateTime>(
+                                        value: _selectedMonth,
+                                        isExpanded: true,
+                                        icon: const Icon(Icons.arrow_drop_down, size: 20),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black87,
+                                          fontSize: 14,
+                                        ),
+                                        onChanged: (DateTime? newValue) {
+                                          if (newValue != null) {
+                                            setState(() {
+                                              _selectedMonth = newValue;
+                                              _applyFilters();
+                                            });
+                                          }
+                                        },
+                                        items: _availableMonths.map<DropdownMenuItem<DateTime>>((DateTime month) {
+                                          return DropdownMenuItem<DateTime>(
+                                            value: month,
+                                            child: Text(_formatMonthYear(month)),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            // Tür seçimi
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "İşlem Türü",
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[50],
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.grey[300]!),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String?>(
+                                        value: _selectedType,
+                                        isExpanded: true,
+                                        icon: const Icon(Icons.arrow_drop_down, size: 20),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black87,
+                                          fontSize: 14,
+                                        ),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            _selectedType = newValue;
+                                            _selectedCategory = null; // Kategoriyi sıfırla
+                                            _applyFilters();
+                                          });
+                                        },
+                                        items: const [
+                                          DropdownMenuItem<String?>(
+                                            value: null,
+                                            child: Text("Tümü"),
+                                          ),
+                                          DropdownMenuItem<String>(
+                                            value: "Income",
+                                            child: Text("Gelir"),
+                                          ),
+                                          DropdownMenuItem<String>(
+                                            value: "Expense",
+                                            child: Text("Gider"),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            // Kategori seçimi
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Kategori",
+                                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[50],
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Colors.grey[300]!),
+                                    ),
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String?>(
+                                        value: _selectedCategory,
+                                        isExpanded: true,
+                                        icon: const Icon(Icons.arrow_drop_down, size: 20),
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black87,
+                                          fontSize: 14,
+                                        ),
+                                        onChanged: (String? newValue) {
+                                          setState(() {
+                                            _selectedCategory = newValue;
+                                            _applyFilters();
+                                          });
+                                        },
+                                        items: [
+                                          const DropdownMenuItem<String?>(
+                                            value: null,
+                                            child: Text("Tümü"),
+                                          ),
+                                          ...(_selectedType == "Income"
+                                                  ? Categories.incomeCategories
+                                                  : _selectedType == "Expense"
+                                                      ? Categories.expenseCategories
+                                                      : Categories.getAllCategories())
+                                              .map((category) => DropdownMenuItem<String>(
+                                                    value: category,
+                                                    child: Text(category),
+                                                  )),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            // Filtreleri temizle butonu
+                            if (_selectedCategory != null || _selectedType != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 18),
+                                child: TextButton.icon(
+                                  onPressed: _clearFilters,
+                                  icon: const Icon(Icons.clear, size: 18),
+                                  label: const Text("Temizle"),
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: Colors.deepPurple,
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                       ],
                     ),
@@ -285,12 +503,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                     Icon(Icons.receipt_long_outlined, size: 64, color: Colors.grey[300]),
                                     const SizedBox(height: 16),
                                     Text(
-                                      "Bu ayda işlem bulunmuyor",
+                                      "Filtrelere uygun işlem bulunmuyor",
                                       style: TextStyle(color: Colors.grey[600], fontSize: 16),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      "Yeni bir işlem eklemek için üstteki butona tıklayın",
+                                      "Filtreleri değiştirerek tekrar deneyin",
                                       style: TextStyle(color: Colors.grey[500], fontSize: 14),
                                     ),
                                   ],
@@ -328,7 +546,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
     );
   }
 
-  // 📱 MOBILE LAYOUT
+  // MOBILE LAYOUT
   Widget _buildMobileLayout() {
     final Map<String, List<Transaction>> grouped = {};
     for (final tx in _filteredTransactions) {
@@ -474,7 +692,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                               if (newValue != null) {
                                 setState(() {
                                   _selectedMonth = newValue;
-                                  _filterByMonth();
+                                  _applyFilters();
                                 });
                               }
                             },
@@ -489,6 +707,90 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
+                  
+                  // Mobil filtreler
+                  Row(
+                    children: [
+                      // Tür filtresi
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: Colors.grey[300]!),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String?>(
+                              value: _selectedType,
+                              isExpanded: true,
+                              icon: const Icon(Icons.arrow_drop_down, size: 18),
+                              style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black87, fontSize: 13),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedType = newValue;
+                                  _selectedCategory = null;
+                                  _applyFilters();
+                                });
+                              },
+                              items: const [
+                                DropdownMenuItem<String?>(value: null, child: Text("Tür")),
+                                DropdownMenuItem<String>(value: "Income", child: Text("Gelir")),
+                                DropdownMenuItem<String>(value: "Expense", child: Text("Gider")),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      // Kategori filtresi
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(color: Colors.grey[300]!),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String?>(
+                              value: _selectedCategory,
+                              isExpanded: true,
+                              icon: const Icon(Icons.arrow_drop_down, size: 18),
+                              style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.black87, fontSize: 13),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  _selectedCategory = newValue;
+                                  _applyFilters();
+                                });
+                              },
+                              items: [
+                                const DropdownMenuItem<String?>(value: null, child: Text("Kategori")),
+                                ...(_selectedType == "Income"
+                                        ? Categories.incomeCategories
+                                        : _selectedType == "Expense"
+                                            ? Categories.expenseCategories
+                                            : Categories.getAllCategories())
+                                    .map((category) => DropdownMenuItem<String>(
+                                          value: category,
+                                          child: Text(category),
+                                        )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      if (_selectedCategory != null || _selectedType != null)
+                        IconButton(
+                          onPressed: _clearFilters,
+                          icon: const Icon(Icons.clear, size: 20),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                    ],
+                  ),
+                  
                   const SizedBox(height: 12),
                   Text(
                     "${_filteredTransactions.length} işlem bulundu",
@@ -505,7 +807,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   children: [
                                     Icon(Icons.receipt_long_outlined, size: 48, color: Colors.grey[400]),
                                     const SizedBox(height: 12),
-                                    Text("Bu ayda işlem bulunmuyor", style: TextStyle(color: Colors.grey[600])),
+                                    Text("Filtrelere uygun işlem yok", style: TextStyle(color: Colors.grey[600])),
                                   ],
                                 ),
                               )
@@ -611,6 +913,26 @@ class _TransactionsPageState extends State<TransactionsPage> {
               fontSize: 17,
             ),
           ),
+          const SizedBox(width: 12),
+          // Düzenle butonu
+          IconButton(
+            onPressed: () => _editTransaction(tx),
+            icon: const Icon(Icons.edit_outlined, size: 20),
+            tooltip: "Düzenle",
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            color: Colors.blue,
+          ),
+          const SizedBox(width: 8),
+          // Sil butonu
+          IconButton(
+            onPressed: () => _deleteTransaction(tx),
+            icon: const Icon(Icons.delete_outline, size: 20),
+            tooltip: "Sil",
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            color: Colors.red,
+          ),
         ],
       ),
     );
@@ -648,6 +970,23 @@ class _TransactionsPageState extends State<TransactionsPage> {
           Text(
             "${isIncome ? '+' : '-'}₺${amount.abs().toStringAsFixed(0)}",
             style: TextStyle(fontWeight: FontWeight.w600, color: color),
+          ),
+          const SizedBox(width: 8),
+          // Düzenle butonu
+          IconButton(
+            onPressed: () => _editTransaction(tx),
+            icon: const Icon(Icons.edit_outlined, size: 18),
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            color: Colors.blue,
+          ),
+          // Sil butonu
+          IconButton(
+            onPressed: () => _deleteTransaction(tx),
+            icon: const Icon(Icons.delete_outline, size: 18),
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(),
+            color: Colors.red,
           ),
         ],
       ),

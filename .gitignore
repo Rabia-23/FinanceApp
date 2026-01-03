@@ -1,2 +1,25 @@
+# macOS
 .DS_Store
+
+# Editor
 .vscode/
+.idea/
+
+# -----------------
+# .NET / ASP.NET
+# -----------------
+bin/
+obj/
+
+# -----------------
+# Flutter / Dart
+# -----------------
+.dart_tool/
+build/
+.pub/
+.pub-cache/
+
+# -----------------
+# Logs & temp
+# -----------------
+*.log

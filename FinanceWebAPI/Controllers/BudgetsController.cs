@@ -29,7 +29,7 @@ namespace FinanceWebAPI.Controllers
                .OrderByDescending(b => b.StartDate)
                .ToListAsync();
 
-         // ✅ Otomatik yenileme kontrolü
+         // Otomatik yenileme kontrolü
          foreach (var budget in budgets)
          {
             await RenewBudgetIfExpired(budget);
@@ -77,7 +77,7 @@ namespace FinanceWebAPI.Controllers
          if (budget == null)
                return NotFound();
 
-         // ✅ UTC olarak belirt (PostgreSQL hatası çözümü)
+         // UTC olarak belirt (PostgreSQL hatası çözümü)
          var startDate = DateTime.SpecifyKind(dto.StartDate, DateTimeKind.Utc);
          var endDate = DateTime.SpecifyKind(dto.EndDate, DateTimeKind.Utc);
 
@@ -110,7 +110,7 @@ namespace FinanceWebAPI.Controllers
          return NoContent();
       }
 
-      // ✅ YENİ: Otomatik Yenileme Fonksiyonu
+      // YENİ: Otomatik Yenileme Fonksiyonu
       private async Task RenewBudgetIfExpired(Budget budget)
       {
          var now = DateTime.UtcNow;

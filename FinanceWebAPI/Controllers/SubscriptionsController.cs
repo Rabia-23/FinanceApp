@@ -125,7 +125,7 @@ namespace FinanceWebAPI.Controllers
                TransactionCategory = subscription.SubscriptionCategory,
                TransactionAmount = subscription.MonthlyFee,
                TransactionNote = dto.Note,
-               TransactionDate = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc), // ✅ UTC olarak belirt
+               TransactionDate = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc), // UTC olarak belirt
                TransactionTime = DateTime.UtcNow.TimeOfDay
             };
 
@@ -134,7 +134,7 @@ namespace FinanceWebAPI.Controllers
             subscription.NextPaymentDate = DateTime.SpecifyKind(
                subscription.NextPaymentDate.AddMonths(1), 
                DateTimeKind.Utc
-            ); // ✅ Bu da UTC olmalı
+            ); // Bu da UTC olmalı
             subscription.IsOverdue = false;
 
             await _context.SaveChangesAsync();
@@ -148,13 +148,13 @@ namespace FinanceWebAPI.Controllers
          }
          catch (Exception ex)
          {
-            // ✅ DETAYLI HATA MESAJI
+            // DETAYLI HATA MESAJI
             return StatusCode(500, new
             {
                   message = "Bir hata oluştu.",
                   error = ex.Message,
-                  innerError = ex.InnerException?.Message, // ✅ Bu önemli
-                  stackTrace = ex.StackTrace // ✅ Debugging için
+                  innerError = ex.InnerException?.Message,
+                  stackTrace = ex.StackTrace
             });
          }
       }
@@ -172,7 +172,7 @@ namespace FinanceWebAPI.Controllers
             subscription.NextPaymentDate = DateTime.SpecifyKind(
                   subscription.NextPaymentDate.AddMonths(1), 
                   DateTimeKind.Utc
-            ); // ✅ UTC olarak belirt
+            ); // UTC olarak belirt
             subscription.IsOverdue = false;
 
             await _context.SaveChangesAsync();

@@ -52,6 +52,46 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // Hesap silme
+  Future<void> _deleteAccount(Account account) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Hesabı Sil"),
+        content: Text("'${account.accountName}' hesabını silmek istediğinize emin misiniz?\n\nBu hesaba bağlı tüm işlemler de silinecektir."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text("İptal"),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text("Sil"),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true) {
+      try {
+        await _service.deleteAccount(account.accountId);
+        _loadHomeData();
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Hesap silindi")),
+          );
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Hata: $e")),
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isWeb = kIsWeb && MediaQuery.of(context).size.width > 800;
@@ -255,41 +295,44 @@ class _HomePageState extends State<HomePage> {
     final currencyFormat = NumberFormat.currency(locale: 'tr_TR', symbol: '₺');
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(color: Colors.deepPurple, width: 2),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Icon(Icons.account_balance_outlined, color: Colors.deepPurple, size: 28),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      account.accountName,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                      overflow: TextOverflow.ellipsis,
+      child: GestureDetector(
+        onLongPress: () => _deleteAccount(account),
+        child: Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(color: Colors.deepPurple, width: 2),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Icon(Icons.account_balance_outlined, color: Colors.deepPurple, size: 28),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        account.accountName,
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Text(
-                currencyFormat.format(account.accountBalance),
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  color: Colors.deepPurple,
+                  ],
                 ),
-              ),
-            ],
+                const SizedBox(height: 12),
+                Text(
+                  currencyFormat.format(account.accountBalance),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20,
+                    color: Colors.deepPurple,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -589,26 +632,29 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildBankCard(Account account) {
     final currencyFormat = NumberFormat.currency(locale: 'tr_TR', symbol: '₺');
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: Colors.deepPurple, width: 2),
-      ),
-      margin: const EdgeInsets.only(bottom: 10),
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(children: [
-              const Icon(Icons.account_balance_outlined, color: Colors.deepPurple),
-              const SizedBox(width: 8),
-              Text(account.accountName, style: const TextStyle(fontSize: 16)),
-            ]),
-            Text(currencyFormat.format(account.accountBalance),
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
-          ],
+    return GestureDetector(
+      onLongPress: () => _deleteAccount(account),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: const BorderSide(color: Colors.deepPurple, width: 2),
+        ),
+        margin: const EdgeInsets.only(bottom: 10),
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(children: [
+                const Icon(Icons.account_balance_outlined, color: Colors.deepPurple),
+                const SizedBox(width: 8),
+                Text(account.accountName, style: const TextStyle(fontSize: 16)),
+              ]),
+              Text(currencyFormat.format(account.accountBalance),
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+            ],
+          ),
         ),
       ),
     );

@@ -70,7 +70,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
     );
   }
 
-  // 🌐 WEB CONTENT (Sidebar yok, sadece içerik)
+  // WEB CONTENT (Sidebar yok, sadece içerik)
   Widget _buildWebContent() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +143,7 @@ class _CurrencyPageState extends State<CurrencyPage> {
     );
   }
 
-  // 📱 MOBILE LAYOUT
+  // MOBILE LAYOUT
   Widget _buildMobileLayout() {
     return SafeArea(
       child: isLoading

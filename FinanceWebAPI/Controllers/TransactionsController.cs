@@ -90,14 +90,14 @@ namespace FinanceWebAPI.Controllers
 
             _context.Transactions.Add(transaction);
 
-            // ✅ DEBUG: Tüm budget'leri çek ve kontrol et
+            // DEBUG: Tüm budget'leri çek ve kontrol et
             if (transaction.TransactionType == "Expense")
             {
                   var allBudgets = await _context.Budgets
                      .Where(b => b.UserId == dto.UserId)
                      .ToListAsync();
 
-                  // ✅ DEBUG LOG
+                  // DEBUG LOG
                   Console.WriteLine($"[DEBUG] Transaction Date: {parsedDate}");
                   Console.WriteLine($"[DEBUG] Found {allBudgets.Count} budgets for user {dto.UserId}");
                   
@@ -155,7 +155,7 @@ namespace FinanceWebAPI.Controllers
          if (account == null)
                return NotFound("İslem yapilan hesap bulunamadi.");
 
-         // ✅ ESKİ TRANSACTION'IN BUDGET ETKİSİNİ GERİ AL
+         // ESKİ TRANSACTION'IN BUDGET ETKİSİNİ GERİ AL
          if (transaction.TransactionType == "Expense")
          {
             var oldBudget = await _context.Budgets
@@ -191,7 +191,7 @@ namespace FinanceWebAPI.Controllers
          else if (transaction.TransactionType == "Expense")
                account.AccountBalance -= transaction.TransactionAmount;
 
-         // ✅ YENİ TRANSACTION'IN BUDGET ETKİSİNİ EKLE
+         // YENİ TRANSACTION'IN BUDGET ETKİSİNİ EKLE
          if (transaction.TransactionType == "Expense")
          {
             var newBudget = await _context.Budgets
@@ -235,7 +235,7 @@ namespace FinanceWebAPI.Controllers
                   account.AccountBalance += transaction.TransactionAmount;
          }
 
-         // ✅ BUDGET'TEN HARCAMAYI ÇIKAR
+         // BUDGET'TEN HARCAMAYI ÇIKAR
          if (transaction.TransactionType == "Expense")
          {
             var budget = await _context.Budgets

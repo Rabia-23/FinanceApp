@@ -87,6 +87,38 @@ class HomeService {
   }
 
   // ---------------------------
+  // UPDATE TRANSACTION (PUT)
+  // ---------------------------
+  Future<bool> updateTransaction(UpdateTransactionModel model) async {
+    final url = Uri.parse("$baseUrl/Transactions/${model.transactionId}");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.put(
+      url,
+      headers: headers,
+      body: jsonEncode(model.toJson()),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      throw Exception("İşlem güncellenemedi: ${response.body}");
+    }
+  }
+
+  // ---------------------------
+  // DELETE TRANSACTION
+  // ---------------------------
+  Future<bool> deleteTransaction(int transactionId) async {
+    final url = Uri.parse("$baseUrl/Transactions/$transactionId");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.delete(url, headers: headers);
+
+    return response.statusCode == 200 || response.statusCode == 204;
+  }
+
+  // ---------------------------
   // GET ACCOUNTS
   // ---------------------------
   Future<List<Account>> getAccounts(int userId) async {
@@ -119,6 +151,18 @@ class HomeService {
     );
 
     return response.statusCode == 200 || response.statusCode == 201;
+  }
+
+  // ---------------------------
+  // DELETE ACCOUNT
+  // ---------------------------
+  Future<bool> deleteAccount(int accountId) async {
+    final url = Uri.parse("$baseUrl/Accounts/$accountId");
+    final headers = await _getAuthHeaders();
+
+    final response = await http.delete(url, headers: headers);
+
+    return response.statusCode == 200 || response.statusCode == 204;
   }
 
   // ---------------------------

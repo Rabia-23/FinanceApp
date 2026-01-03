@@ -99,7 +99,7 @@ class _AddSubscriptionPopupState extends State<AddSubscriptionPopup> {
     );
   }
 
-  // 🌐 WEB FORM
+  // WEB FORM
   Widget _buildWebForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +185,7 @@ class _AddSubscriptionPopupState extends State<AddSubscriptionPopup> {
     );
   }
 
-  // 📱 MOBILE FORM
+  // MOBILE FORM
   Widget _buildMobileForm() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
