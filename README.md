@@ -5,39 +5,41 @@
 
 ## Home Page
    - Accounts
-      * Bakiye ve Hesap Adi bilgileri girilerek yeni hesap eklenebilir ve olusturulmus hesap kartinin ustune basilarak hesap silinebilir.
-      * Ana sayfada Hesap kartlari halinde Hesba adi ve o hesaba ait bakiye gosterilir.
+      * Bakiye ve hesap adı bilgileri girilerek yeni hesap eklenebilir ve oluşturulmuş hesap kartının üstüne basılı tutularak hesap silinebilir.
+      * Ana sayfada hesap kartları halinde hesap adı ve o hesaba ait bakiye gösterilir.
+
    - Net Worth + Graph
-      * Kullanicinin toplam bakiyesi gosterilir.
-      * Gelir ve giderleri tek cizgi grafik ile gosterilir.
-      * Kategori bazli pasta grafigi gosterilir.
+      * Kullanıcının toplam bakiyesi gösterilir.
+      * Gelir ve giderler tek çizgi grafik ile gösterilir.
+      * Kategori bazlı pasta grafiği gösterilir.
+
    - Transactions + Budgets
-      * Kullanicinin son 30 islemi goruntulenir.
-      * Islemler tarihlerine gore gruplandirilir.
-      * Islemlerin gider veya gelir oldugu, ne kadar oldugu ve ne zaman isleme gecildigi gosterilir.
-      * Hizli islem olusturmak icin “+ Islem Ekle” butonu ana sayfada da yer alir (butonun icerigi Transactions kisminda aciklanacak).
-      * Yeni butce olusturma karti ile butcenin periyot tipi (haftalik, aylik, yillik), butcenin baslangic tarihi (bitis tarihi belirlenen periyot turune gore otomatik olusturulur) ve butce limiti bilgileri girilerek kolay bir sekilde yeni butce olusturulur.
-      * Olusturulan butce kartinda butcenin limitiyle birlikte harcanan miktar, progress cubugu, butcenin yuzde kacinin harcandigi butce bitimine ne kadar kaldigi ve periyot tipi bulunur.
-      * Butce kartina basildiginda butce gecmisleri gorunur.
-      * Butce kartina basili tutuldugunda butce guncelleme ve silme secenekleri bulunur.
-      * Butce silinmedigi surece butce secilen periyodik sure icerisinde otomatik yenilenmeye devam eder.
+      * Kullanıcının son 30 işlemi görüntülenir.
+      * İşlemler tarihlerine göre gruplandırılır.
+      * İşlemlerin gider veya gelir olduğu, ne kadar olduğu ve ne zaman işleme geçildiği gösterilir.
+      * Hızlı işlem oluşturmak için “+ İşlem Ekle” butonu ana sayfada da yer alır (butonun içeriği Transactions kısmında açıklanacak).
+      * Yeni bütçe oluşturma kartı ile bütçenin periyot tipi (haftalık, aylık, yıllık), bütçenin başlangıç tarihi (bitiş tarihi belirlenen periyot türüne göre otomatik oluşturulur) ve bütçe limit bilgileri girilerek kolay bir şekilde yeni bütçe oluşturulur.
+      * Oluşturulan bütçe kartında bütçenin limitiyle birlikte harcanan miktar, progress çubuğu, bütçenin yüzde kaçının harcandığı bütçe bitimine ne kadar kaldığı ve periyot tipi bulunur.
+      * Bütçe kartına basıldığında bütçe geçmişleri görünür.
+      * Bütçe kartına basılı tutulduğunda bütçe güncelleme ve silme seçenekleri bulunur.
+      * Bütçe silinmediği sürece bütçe seçilen periyodik süre türünde otomatik yenilenmeye devam eder.
+
 # Transactions Page
-   * Islemler aylara, kategorilere ve gelir-gider olduguna gore filtrelenebilir.
-   * “CSV Indir” butonu ile filtrelenilen aya ait islemler csv dosyasi olarak indirilir.
-   * “+ Yeni Islem” butonu ile islem turu, tarih, saat, tutar, banka hesabi (kullaniciya ait hesaplar dropdown ile secilir), baslik, kategori ve opsiyonel bir not bilgileri girilerek kolayca yeni bir islem olusturulur.
-   * Her bir islem guncellenebilir ve silinebilir. Silinen transaction hengi hesaptan harcandiysa otomatik olarak o hesaba transaction'da harcanan para geri eklenir.
+   * İşlemler aylara, kategorilere ve gelir-gider olduğuna göre filtrelenebilir.
+   * “CSV İndir” butonu ile filtrelenen işlemler csv dosyası olarak indirilir.
+   * “+ Yeni İşlem” butonu ile işlem türü, tarih, saat, tutar, banka hesabı (kullanıcıya ait hesaplar dropdown ile seçilir), başlık kategori ve opsiyonel bir not bilgileri girilerek kolayca yeni bir işlem oluşturulur.
+   * Her bir işlem güncellenebilir ve silinebilir. Silinen transaction hangi hesaptan harcandıysa otomatik olarak o hesaba transaction’da harcanan para geri eklenir.
+
 # Subscriptions Page
-   * Aboneliklere giden toplam aylik harcama, aktif abonelik sayisi ve yaklasan odeme sayisi gosterilir.
-   * Tum abonelikler kartlar seklinde listelenir.
-   * Bir abonelik kartina tiklanildiginda aboneligin odemesi yapilabilir, aboneligin o ayki odemesi atlanilabilir, abonelik silinebilir.
-   * “+ Yeni Abonelik” butonu ile abonelik adi, kategori, aylik tutar ve odeme gunu bilgileri girilerek kolayca yeni bir abonelik olusturulur.
+   * Aboneliklere giden toplam aylık harcama, aktif abonelik sayısı ve yaklaşan ödeme sayısı gösterilir.
+   * Tüm abonelikler kartlar şeklinde listelenir.
+   * Bir abonelik kartına tıklandığında aboneliğin ödemesi yapılabilir, aboneliğin o aylik ödemesi atlanabilir, abonelik silinebilir.
+   * “+ Yeni Abonelik” butonu ile abonelik adı, kategori, aylık tutar ve ödeme günü bilgileri girilerek kolayca yeni bir abonelik oluşturulur.
+
 # Goals Page
-   * Olusturulan abonelik kartlarinda progress cubugu, yuzdelik, hedeflenen tutar, hedef adi ve hedef’i silmek icin bir ikon bulunur.
-   * Bir hedef kartina tiklanildiginda hedefte/birikimde olan mevcut para miktari, hedeflenen tutar, hedefe ulasmak icin kalan miktar progress cubugu ve yuzdelik ile birlikte verilir. Altinda ise hedefe katki eklemek icin parayi ayirmak icin hesap (kullanicinin var olan hesaplarindan), katki miktari ve opsiyonel bir not bilgileri girilir.
-   * “+ Yeni Hedef” butonu ile hedef turu, hedef adi, hedef miktari, baslangic tarihi ve bitis tarihi bilgileri girilerek kolayca yeni bir hedef/birikim olusturulur.
+   * Oluşturulan hedef kartlarında progress çubuğu, yüzdelik, hedeflenen tutar, hedef adı ve hedefi silmek için bir ikon bulunur.
+   * Bir hedef kartına tıklanıldığında hedefte/birikimde olan mevcut para miktarı, hedeflenen tutar, hedefe ulaşmak için kalan miktar progress çubuğu ve yüzdelik ile birlikte verilir. Altında ise hedefe katkı eklemek için hesap (kullanıcının var olan hesaplarından), katkı miktarı ve opsiyonel bir not bilgileri girilir.
+   * “+ Yeni Hedef” butonu ile hedef türü, hedef adı, hedef miktarı, başlangıç tarihi ve bitiş tarihi bilgileri girilerek kolayca yeni bir hedef/birikim oluşturulur.
+
 # Currency Page
-   * USD, EUR, GBP, CHF, JPY, KRW ekranda -TRY bazli- gosterilir.
-
-
-# Iyilestirme Onerileri
-   * Transaction icin opsiyonel olan notlari transaction ustune tiklanildiginda veya hover yapildiginda gostermek
+   * USD, EUR, GBP, CHF, JPY, KRW ekranda -TRY bazlı- gösterilir.

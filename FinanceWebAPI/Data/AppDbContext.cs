@@ -15,7 +15,7 @@ namespace FinanceWebAPI.Data
       public DbSet<Subscription> Subscriptions { get; set; }
       public DbSet<Goal> Goals { get; set; }
 
-      // Model ilişkileri
+      // Model iliskileri
       protected override void OnModelCreating(ModelBuilder modelBuilder)
       {
          base.OnModelCreating(modelBuilder);

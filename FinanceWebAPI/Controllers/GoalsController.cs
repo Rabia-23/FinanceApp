@@ -39,14 +39,18 @@ namespace FinanceWebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            // Convert dates to UTC to satisfy PostgreSQL
+            var startDateUtc = DateTime.SpecifyKind(dto.StartDate, DateTimeKind.Utc);
+            var endDateUtc = DateTime.SpecifyKind(dto.EndDate, DateTimeKind.Utc);
+
             var goal = new Goal
             {
                 UserId = dto.UserId,
                 GoalType = dto.GoalType,
                 GoalName = dto.GoalName,
                 TargetAmount = dto.TargetAmount,
-                StartDate = dto.StartDate,
-                EndDate = dto.EndDate,
+                StartDate = startDateUtc,
+                EndDate = endDateUtc,
                 CurrentAmount = 0
             };
 
@@ -64,11 +68,15 @@ namespace FinanceWebAPI.Controllers
             if (goal == null)
                 return NotFound();
 
+            // Convert dates to UTC
+            var startDateUtc = DateTime.SpecifyKind(dto.StartDate, DateTimeKind.Utc);
+            var endDateUtc = DateTime.SpecifyKind(dto.EndDate, DateTimeKind.Utc);
+
             goal.GoalType = dto.GoalType;
             goal.GoalName = dto.GoalName;
             goal.TargetAmount = dto.TargetAmount;
-            goal.StartDate = dto.StartDate;
-            goal.EndDate = dto.EndDate;
+            goal.StartDate = startDateUtc;
+            goal.EndDate = endDateUtc;
             goal.CurrentAmount = dto.CurrentAmount;
 
             await _context.SaveChangesAsync();
@@ -99,7 +107,7 @@ namespace FinanceWebAPI.Controllers
                // Goal'a para ekle
                goal.CurrentAmount += dto.Amount;
 
-               // Transaction oluştur
+               // Transaction oluştur - UTC tarihi kullan
                var transaction = new Transaction
                {
                      UserId = goal.UserId,

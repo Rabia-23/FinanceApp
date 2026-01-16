@@ -113,8 +113,8 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
-        Type = SecuritySchemeType.Http,  // ← Tekrar Http yaptık
-        Scheme = "bearer",  // ← Küçük harfle "bearer"
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
         Description = "JWT Authorization header. Enter your token below."
@@ -166,7 +166,7 @@ app.UseRouting(); // HTTP isteklerini Controller'a yonlendirir
 // CORS middleware’i
 app.UseCors();
 app.UseAuthentication();
-app.UseAuthorization(); // yetkilendirme kontrolu (su an auth yok)
+app.UseAuthorization(); // yetkilendirme
 app.MapControllers(); // controller endpoint'lerini aktif eder
 
 app.Run();

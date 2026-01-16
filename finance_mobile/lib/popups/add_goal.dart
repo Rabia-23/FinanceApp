@@ -22,6 +22,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
   DateTime? _startDate;
   DateTime? _endDate;
   String? _selectedGoalType;
+  bool _isSubmitting = false;
 
   final GoalService _service = GoalService();
 
@@ -30,6 +31,13 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
     "Yatırım Hedefi (örn: Borsa, altın)",
     "Borç Ödeme Hedefi (örn: kredi kartı borcu)"
   ];
+
+  @override
+  void dispose() {
+    _goalNameController.dispose();
+    _goalAmountController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +87,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
                   const Spacer(),
                   IconButton(
                     icon: const Icon(Icons.close, color: Colors.white),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: _isSubmitting ? null : () => Navigator.pop(context),
                   ),
                 ],
               ),
@@ -156,20 +164,30 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
           width: double.infinity,
           height: 52,
           child: ElevatedButton(
-            onPressed: _submitGoal,
+            onPressed: _isSubmitting ? null : _submitGoal,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               elevation: 0,
+              disabledBackgroundColor: Colors.grey,
             ),
-            child: const Text(
-              "Hedef Ekle",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-                fontSize: 16,
-              ),
-            ),
+            child: _isSubmitting
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  )
+                : const Text(
+                    "Hedef Ekle",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
           ),
         ),
       ],
@@ -217,16 +235,26 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: _submitGoal,
+            onPressed: _isSubmitting ? null : _submitGoal,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.deepPurple,
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              disabledBackgroundColor: Colors.grey,
             ),
-            child: const Text(
-              "Hedef Ekle",
-              style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-            ),
+            child: _isSubmitting
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  )
+                : const Text(
+                    "Hedef Ekle",
+                    style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+                  ),
           ),
         ),
       ],
@@ -261,6 +289,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
+      enabled: !_isSubmitting,
       decoration: InputDecoration(
         hintText: hint,
         filled: true,
@@ -279,6 +308,10 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey[200]!),
+        ),
         contentPadding: EdgeInsets.symmetric(
           horizontal: prefixIcon != null ? 12 : 16,
           vertical: 14,
@@ -290,7 +323,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
   Widget _buildGoalTypeDropdown() {
     return DropdownButtonFormField<String>(
       isExpanded: true,
-      initialValue: _selectedGoalType,
+      value: _selectedGoalType,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.grey[50],
@@ -320,7 +353,7 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
                 ),
               ))
           .toList(),
-      onChanged: (value) {
+      onChanged: _isSubmitting ? null : (value) {
         setState(() => _selectedGoalType = value);
       },
     );
@@ -337,17 +370,28 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
         const SizedBox(height: 8),
         TextField(
           readOnly: true,
+          enabled: !_isSubmitting,
           controller: TextEditingController(
             text: _startDate == null
                 ? ""
                 : "${_startDate!.day.toString().padLeft(2, '0')}.${_startDate!.month.toString().padLeft(2, '0')}.${_startDate!.year}",
           ),
-          onTap: () async {
+          onTap: _isSubmitting ? null : () async {
             final picked = await showDatePicker(
               context: context,
-              initialDate: DateTime.now(),
+              initialDate: _startDate ?? DateTime.now(),
               firstDate: DateTime(2000),
               lastDate: DateTime(2100),
+              builder: (context, child) {
+                return Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: const ColorScheme.light(
+                      primary: Colors.deepPurple,
+                    ),
+                  ),
+                  child: child!,
+                );
+              },
             );
             if (picked != null) {
               setState(() => _startDate = picked);
@@ -370,6 +414,10 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
             ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey[200]!),
+            ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           ),
         ),
@@ -388,17 +436,28 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
         const SizedBox(height: 8),
         TextField(
           readOnly: true,
+          enabled: !_isSubmitting,
           controller: TextEditingController(
             text: _endDate == null
                 ? ""
                 : "${_endDate!.day.toString().padLeft(2, '0')}.${_endDate!.month.toString().padLeft(2, '0')}.${_endDate!.year}",
           ),
-          onTap: () async {
+          onTap: _isSubmitting ? null : () async {
             final picked = await showDatePicker(
               context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(2000),
+              initialDate: _endDate ?? _startDate ?? DateTime.now(),
+              firstDate: _startDate ?? DateTime(2000),
               lastDate: DateTime(2100),
+              builder: (context, child) {
+                return Theme(
+                  data: Theme.of(context).copyWith(
+                    colorScheme: const ColorScheme.light(
+                      primary: Colors.deepPurple,
+                    ),
+                  ),
+                  child: child!,
+                );
+              },
             );
             if (picked != null) {
               setState(() => _endDate = picked);
@@ -421,6 +480,10 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
             ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(color: Colors.grey[200]!),
+            ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           ),
         ),
@@ -429,27 +492,54 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
   }
 
   Future<void> _submitGoal() async {
-    if (_goalNameController.text.isEmpty ||
-        _selectedGoalType == null ||
-        _goalAmountController.text.isEmpty ||
-        _startDate == null ||
-        _endDate == null) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Lütfen tüm alanları doldurun.")),
-      );
+    // Validation
+    if (_goalNameController.text.trim().isEmpty) {
+      _showError("Lütfen hedef adı girin.");
+      return;
+    }
+
+    if (_selectedGoalType == null) {
+      _showError("Lütfen hedef türü seçin.");
+      return;
+    }
+
+    if (_goalAmountController.text.trim().isEmpty) {
+      _showError("Lütfen hedef miktarı girin.");
+      return;
+    }
+
+    double? targetAmount;
+    try {
+      targetAmount = double.parse(_goalAmountController.text.trim());
+      if (targetAmount <= 0) {
+        _showError("Hedef miktar 0'dan büyük olmalıdır.");
+        return;
+      }
+    } catch (e) {
+      _showError("Geçerli bir hedef miktarı girin.");
+      return;
+    }
+
+    if (_startDate == null) {
+      _showError("Lütfen başlangıç tarihi seçin.");
+      return;
+    }
+
+    if (_endDate == null) {
+      _showError("Lütfen bitiş tarihi seçin.");
       return;
     }
 
     if (_endDate!.isBefore(_startDate!)) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Bitiş tarihi başlangıç tarihinden önce olamaz.")),
-      );
+      _showError("Bitiş tarihi başlangıç tarihinden önce olamaz.");
       return;
     }
 
+    // Set loading state
+    setState(() => _isSubmitting = true);
+
     try {
+      // Format dates to ISO 8601 format (yyyy-MM-dd)
       final formattedStartDate = "${_startDate!.year.toString().padLeft(4, '0')}-"
           "${_startDate!.month.toString().padLeft(2, '0')}-"
           "${_startDate!.day.toString().padLeft(2, '0')}";
@@ -461,32 +551,59 @@ class _AddGoalPopupState extends State<AddGoalPopup> {
       final model = CreateGoalModel(
         userId: widget.userId,
         goalType: _selectedGoalType!,
-        goalName: _goalNameController.text,
-        targetAmount: double.parse(_goalAmountController.text),
+        goalName: _goalNameController.text.trim(),
+        targetAmount: targetAmount,
         startDate: formattedStartDate,
         endDate: formattedEndDate,
       );
+
+      print("Sending goal data: ${model.toJson()}");
 
       final success = await _service.addGoal(model);
 
       if (!mounted) return;
 
       if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Hedef başarıyla eklendi.")),
-        );
+        _showSuccess("Hedef başarıyla eklendi.");
         widget.onGoalAdded?.call();
         Navigator.pop(context);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Bir hata oluştu, tekrar deneyin.")),
-        );
+        _showError("Hedef eklenirken bir hata oluştu. Lütfen tekrar deneyin.");
       }
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Hata: $e")),
-      );
+      print("Error adding goal: $e");
+      _showError("Hata: ${e.toString()}");
+    } finally {
+      if (mounted) {
+        setState(() => _isSubmitting = false);
+      }
     }
+  }
+
+  void _showError(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
+  }
+
+  void _showSuccess(String message) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.green,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        margin: const EdgeInsets.all(16),
+      ),
+    );
   }
 }
